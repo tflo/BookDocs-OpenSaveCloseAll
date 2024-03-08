@@ -1,13 +1,15 @@
-// modtf: added 3rd menu "Save and Close"
-// modtf: added 4th menu "Close w/o Saving"
-
+// Sources, other variants, helpful articles:
 // https://creativepro.com/add-missing-options-to-the-book-menu/
 // https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008
 // https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html
 // https://www.indiscripts.com/post/2010/02/how-to-create-your-own-indesign-menus
 
+// This script: Thomas Floeren, 2024
+// All credits to the original author(s)
 
-#targetengine "BookOpenSaveCloseAll"
+#targetengine "BookDocs-OpenSaveCloseAll"
+
+// Core func for closing/saving all
 
 function SaveOrCloseBookDocs(close, saveoption) {
 	var docs = app.documents;
@@ -27,6 +29,7 @@ function SaveOrCloseBookDocs(close, saveoption) {
 	}
 }
 
+// Handlers for 5 menu items
 
 var fcaTitle1 = "Open All Book Documents";
 var fcaHandlers1 = {
@@ -37,17 +40,16 @@ var fcaHandlers1 = {
 
 	'onInvoke' : function()
 		{
-			//tf "Silent" alternative
-// 			app.scriptPreferences.userInteractionLevel = UserInteractionLevels.neverInteract;
+			// For a "silenced" alternative uncomment the next line (and also the one after the loop!)
+			// app.scriptPreferences.userInteractionLevel = UserInteractionLevels.neverInteract;
 			for (var i = app.activeBook.bookContents.length -1; i >= 0; i--)
 			{
 				app.open (app.activeBook.bookContents[i].fullName, true)
 			}
-			//tf "Silent" alternative
-// 			app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
+			// For a "silenced" alternative uncomment the next line
+			// app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
 		}
 	};
-
 
 var fcaTitle2 = "Close All Book Documents";
 var fcaHandlers2 = {
@@ -118,21 +120,14 @@ var fcaHandlers5 = {
 				staticTexts.add({ staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?" });
 			}
 			var myResult = myDialog.show();
-			//tf Simpler dialog, but ugly
-// 			var myResult = confirm("Close all documents of " + app.activeBook.name + " w/o saving?", true);
 			if (myResult) {
 				SaveOrCloseBookDocs(true, "NO")
-				// Original way
-// 				var i;
-// 				for(i = app.activeBook.bookContents.length-1; i>=0 ; i-- )
-// 				{
-// 					app.open (app.activeBook.bookContents[i].fullName, false).close(SaveOptions.NO);
-// 				}
 			}
 			myDialog.destroy();
 		}
 	};
 
+// Add the menu items
 
 var fcaMenuInstaller = fcaMenuInstaller||
 (function(items)
@@ -151,11 +146,11 @@ var fcaMenuInstaller = fcaMenuInstaller||
 			}
 
 		// 3. Create the menu items
-		//tf Works also: "$ID/BookPanelPopup"
+		//Works also: "$ID/BookPanelPopup"
 		var mainMenu = app.menus.item("$ID/Book Panel Menu");
 		var refItem = mainMenu.menuItems.item("$ID/Close Book");
 
-		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE,refItem);
+		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE, refItem);
 	}
 	return true;
 })([{title:fcaTitle1, handler:fcaHandlers1}, {title:fcaTitle2, handler:fcaHandlers2}, {title:fcaTitle3, handler:fcaHandlers3}, {title:fcaTitle4, handler:fcaHandlers4}, {title:fcaTitle5, handler:fcaHandlers5}]);
