@@ -136,7 +136,7 @@ var fcaMenuInstaller = fcaMenuInstaller ||
 			mnuAction.eventListeners.add(ev,items[allIt].handler[ev]);
 		}
 		// 3. Create the menu items
-		var mainMenu = app.menus.item("$ID/Book Panel Menu"); // Works also: "$ID/BookPanelPopup"
+		var mainMenu = app.menus.item("$ID/BookPanelPopup"); // Works also: "$ID/Book Panel Menu"
 		var refItem = mainMenu.menuItems.item("$ID/Close Book");
 		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE, refItem);
 	}
