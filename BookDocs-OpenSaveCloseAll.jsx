@@ -1,11 +1,19 @@
-// Sources, other variants, helpful articles:
-// https://creativepro.com/add-missing-options-to-the-book-menu/
-// https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008
-// https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html
-// https://www.indiscripts.com/post/2010/02/how-to-create-your-own-indesign-menus
+/*
+BookDocs-OpenSaveCloseAll
 
-// This script: Thomas Floeren, 2024
-// All credits to the original author(s)
+A script for Adobe InDesign that adds menu items to the book panel menu for opening/saving/closing *all* documents of the active book. This is a startup script (place it in the Startup Scripts folder inside your user scripts folder).
+
+See the readme for more info.
+
+Sources, other variants, helpful articles:
+https://creativepro.com/add-missing-options-to-the-book-menu/
+https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008
+https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html
+https://www.indiscripts.com/post/2010/02/how-to-create-your-own-indesign-menus
+
+This script: Tom Floeren, 2024
+All credits to the original author(s).
+ */
 
 #targetengine "BookDocs-OpenSaveCloseAll"
 
@@ -30,7 +38,7 @@ function SaveOrCloseBookDocs(close, saveoption) {
 	}
 }
 
-// Handlers for 5 menu items
+// Titles and handlers for 5 new menu items
 
 var fcaTitle1 = "Open All Book Documents";
 var fcaHandlers1 = {
@@ -122,7 +130,7 @@ var fcaHandlers5 = {
 	}
 };
 
-// Add the menu items
+// Create the menu items
 
 var fcaMenuInstaller = fcaMenuInstaller ||
 (function(items) {
@@ -135,17 +143,18 @@ var fcaMenuInstaller = fcaMenuInstaller ||
 		for (var ev in items[allIt].handler) {
 			mnuAction.eventListeners.add(ev,items[allIt].handler[ev]);
 		}
-		// 3. Create the menu items
+		// 3. Add the menu items
 		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE, refItem);
 	}
+	// 4. Add a separator
 	mainMenu.menuSeparators.add(LocationOptions.BEFORE, refItem);
 	return true;
 })([
-	{title:fcaTitle1, handler:fcaHandlers1},
-	{title:fcaTitle2, handler:fcaHandlers2},
-	{title:fcaTitle3, handler:fcaHandlers3},
-	{title:fcaTitle4, handler:fcaHandlers4},
-	{title:fcaTitle5, handler:fcaHandlers5}
+	{title:fcaTitle1, handler:fcaHandlers1}, // Open
+	{title:fcaTitle2, handler:fcaHandlers2}, // Close
+	{title:fcaTitle3, handler:fcaHandlers3}, // Save
+	{title:fcaTitle4, handler:fcaHandlers4}, // Save & Close
+	{title:fcaTitle5, handler:fcaHandlers5}  // Close & no Save
 ]);
 
 
