@@ -48,7 +48,7 @@ var fcaHandlers1 = {
 		}
 
 		for (var i = app.activeBook.bookContents.length -1; i >= 0; i--) {
-			app.open (app.activeBook.bookContents[i].fullName, showingWindow);
+			app.open(app.activeBook.bookContents[i].fullName, showingWindow);
 		}
 		app.scriptPreferences.userInteractionLevel = prevPrefs;
 	}
@@ -72,7 +72,7 @@ var fcaHandlers3 = {
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Save all Book Documents" });
+		var myDialog = app.dialogs.add({ name: "Save All Book Documents" });
 		with (myDialog.dialogColumns.add()) {
 			staticTexts.add({ staticLabel: "Save all documents of '" + app.activeBook.name + "'?" });
 		}
@@ -91,9 +91,9 @@ var fcaHandlers4 = {
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Save and Close all Book Documents" });
+		var myDialog = app.dialogs.add({ name: "Save and Close All Book Documents" });
 		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({ staticLabel: "Save and close all documents of '" + app.activeBook.name + "'?" });
+			staticTexts.add({staticLabel: "Save and close all documents of '" + app.activeBook.name + "'?"});
 		}
 		var myResult = myDialog.show();
 		if (myResult) {
@@ -110,9 +110,9 @@ var fcaHandlers5 = {
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Close all Book Documents without Saving!" });
+		var myDialog = app.dialogs.add({ name: "Close All Book Documents without Saving!" });
 		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({ staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?" });
+			staticTexts.add({staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?"});
 		}
 		var myResult = myDialog.show();
 		if (myResult) {
