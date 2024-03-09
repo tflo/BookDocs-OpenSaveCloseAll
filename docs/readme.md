@@ -22,15 +22,15 @@ Details see below.
 
 The script adds these menu items to the book panel menu:
 
-- Open All Book Documents
-- Close All Book Documents
-- Save All Book Documents…
-- Save and Close All Book Documents…
-- Close All Book Documents w/o Saving…
+- Open All Documents
+- Close All Documents
+- Save All Documents…
+- Save and Close All Documents…
+- Close All Documents without Saving…
 
-<img src="menu-pty-fs8.png" width=50% height=50%>
+<img src="menu-pty.png" width=50% height=50%>
 
-“Open All Book Documents” has two extra features:
+“Open All Documents” has two extra features:
 
 - Hold down Option/Alt to silence any dialogs during opening (UserInteractionLevels.NEVER_INTERACT).
 - Hold down Shift to open without showing windows (this might be useful to speed up certain book-wide operations, like synching or updating numbering, without having window/tab clutter; or just to “preload” documents, so that the window builds instantly when you double-click the book document later).

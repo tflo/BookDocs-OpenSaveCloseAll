@@ -40,7 +40,7 @@ function SaveOrCloseBookDocs(close, saveoption) {
 
 // Titles and handlers for 5 new menu items
 
-var fcaTitle1 = "Open All Book Documents";
+var fcaTitle1 = "Open All Documents";
 var fcaHandlers1 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
@@ -62,7 +62,7 @@ var fcaHandlers1 = {
 	}
 };
 
-var fcaTitle2 = "Close All Book Documents";
+var fcaTitle2 = "Close All Documents";
 var fcaHandlers2 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
@@ -73,7 +73,7 @@ var fcaHandlers2 = {
 	}
 };
 
-var fcaTitle3 = "Save All Book Documents\u2026";
+var fcaTitle3 = "Save All Documents\u2026";
 var fcaHandlers3 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
@@ -92,7 +92,7 @@ var fcaHandlers3 = {
 	}
 };
 
-var fcaTitle4 = "Save and Close All Book Documents\u2026";
+var fcaTitle4 = "Save and Close All Documents\u2026";
 var fcaHandlers4 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
@@ -111,7 +111,7 @@ var fcaHandlers4 = {
 	}
 };
 
-var fcaTitle5 = "Close All Book Documents w/o Saving\u2026";
+var fcaTitle5 = "Close All Documents without Saving\u2026";
 var fcaHandlers5 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
