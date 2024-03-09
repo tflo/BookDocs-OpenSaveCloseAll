@@ -26,6 +26,8 @@ The script adds these menu items to the book panel menu:
 - Save and Close All Book Documents…
 - Close All Book Documents w/o Saving…
 
+![New menu items](menu-pty-fs8.png)
+
 “Open All Book Documents” has two extra features:
 
 - Hold down Option/Alt to silence any dialogs during opening (UserInteractionLevels.NEVER_INTERACT).
