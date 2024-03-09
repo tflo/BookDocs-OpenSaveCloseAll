@@ -126,20 +126,26 @@ var fcaHandlers5 = {
 
 var fcaMenuInstaller = fcaMenuInstaller ||
 (function(items) {
-	var allIt;
-	for (allIt = 0; allIt < items.length; allIt++) {
+	var mainMenu = app.menus.item("$ID/BookPanelPopup"); // Works also: "$ID/Book Panel Menu"
+	var refItem = mainMenu.menuItems.item("$ID/Save Book");
+	for (var allIt = 0; allIt < items.length; allIt++) {
 		// 1. Create the script menu action
 		var mnuAction = app.scriptMenuActions.add(items[allIt].title);
 		// 2. Attach the event listener
-		var ev;
-		for (ev in items[allIt].handler) {
+		for (var ev in items[allIt].handler) {
 			mnuAction.eventListeners.add(ev,items[allIt].handler[ev]);
 		}
 		// 3. Create the menu items
-		var mainMenu = app.menus.item("$ID/BookPanelPopup"); // Works also: "$ID/Book Panel Menu"
-		var refItem = mainMenu.menuItems.item("$ID/Close Book");
 		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE, refItem);
 	}
+	mainMenu.menuSeparators.add(LocationOptions.BEFORE, refItem);
 	return true;
-})([{title:fcaTitle1, handler:fcaHandlers1}, {title:fcaTitle2, handler:fcaHandlers2}, {title:fcaTitle3, handler:fcaHandlers3}, {title:fcaTitle4, handler:fcaHandlers4}, {title:fcaTitle5, handler:fcaHandlers5}]);
+})([
+	{title:fcaTitle1, handler:fcaHandlers1},
+	{title:fcaTitle2, handler:fcaHandlers2},
+	{title:fcaTitle3, handler:fcaHandlers3},
+	{title:fcaTitle4, handler:fcaHandlers4},
+	{title:fcaTitle5, handler:fcaHandlers5}
+]);
+
 
