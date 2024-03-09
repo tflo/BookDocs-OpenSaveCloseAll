@@ -1,6 +1,6 @@
 # BookDocs-OpenSaveCloseAll
 
-A script for Adobe InDesign that adds menu items to the book panel menu for opening/saving/closing *all* documents of the active book
+A script for Adobe InDesign that adds menu items to the book panel menu for opening/saving/closing *all* documents of the active book. This is a startup script (place it in the Startup Scripts folder inside your user scripts folder).
 
 The script is based on a script “BookOpenAll“, downloaded from [here](https://creativepro.com/add-missing-options-to-the-book-menu/) (Theunis De Jong, 2012).
 
