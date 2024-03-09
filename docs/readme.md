@@ -2,17 +2,19 @@
 
 A script for Adobe InDesign that adds menu items to the book panel menu for opening/saving/closing *all* documents of the active book. This is a startup script (place it in the Startup Scripts folder inside your user scripts folder).
 
-The script is based on a script “BookOpenAll“, downloaded from [here](https://creativepro.com/add-missing-options-to-the-book-menu/) (Theunis De Jong, 2012).
+The script is based on the script “BookOpenAll“, downloaded from [here](https://creativepro.com/add-missing-options-to-the-book-menu/) (Theunis De Jong, 2012).
 
 Other variants and related discussion on *hilfdirselbst*: [1](https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008), [2](https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html).
 
-This script has been tested with InDesign 19.x (2024). Since I recently added some features, there might be bugs… (but it doesn't seem so).
+This script has been tested with InDesign 19.x (2024) on macOS. Since I recently added some features, there might be bugs… (but it doesn't seem so). 
+
+Use this script at your own risk. Make sure it works properly with your setup before using it with production documents!
 
 ## Improvements over the original version: 
 
-- More functionality: Open, close, save all
+- More functionality: Open, Close, Save All
 - Confirmation for potentially dangerous actions
-- “Close All” closes only book documents that actually are open
+- “Close All” only closes book documents that are actually open
 
 Details see below.
 
