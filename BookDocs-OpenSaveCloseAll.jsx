@@ -15,7 +15,7 @@ This script: Tom Floeren, 2024
 All credits to the original author(s).
  */
 
-#targetengine "BookDocs-OpenSaveCloseAll"
+#targetengine 'BookDocs-OpenSaveCloseAll'
 
 // Core func for closing/saving all
 
@@ -40,7 +40,7 @@ function SaveOrCloseBookDocs(close, saveoption) {
 
 // Titles and handlers for 5 new menu items
 
-var fcaTitle1 = "Open All Documents";
+var fcaTitle1 = 'Open All Documents';
 var fcaHandlers1 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
@@ -62,27 +62,27 @@ var fcaHandlers1 = {
 	}
 };
 
-var fcaTitle2 = "Close All Documents";
+var fcaTitle2 = 'Close All Documents';
 var fcaHandlers2 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
 	},
 
 	'onInvoke' : function() {
-		SaveOrCloseBookDocs(true, "ASK");
+		SaveOrCloseBookDocs(true, 'ASK');
 	}
 };
 
-var fcaTitle3 = "Save All Documents\u2026";
+var fcaTitle3 = 'Save All Documents\u2026';
 var fcaHandlers3 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Save All Book Documents" });
+		var myDialog = app.dialogs.add({ name: 'Save All Book Documents' });
 		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({ staticLabel: "Save all documents of '" + app.activeBook.name + "'?" });
+			staticTexts.add({ staticLabel: 'Save all documents of “' + app.activeBook.name + '”?' });
 		}
 		var myResult = myDialog.show();
 		if (myResult) {
@@ -92,39 +92,39 @@ var fcaHandlers3 = {
 	}
 };
 
-var fcaTitle4 = "Save and Close All Documents\u2026";
+var fcaTitle4 = 'Save and Close All Documents\u2026';
 var fcaHandlers4 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Save and Close All Book Documents" });
+		var myDialog = app.dialogs.add({ name: 'Save and Close All Book Documents' });
 		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({staticLabel: "Save and close all documents of '" + app.activeBook.name + "'?"});
+			staticTexts.add({staticLabel: 'Save and close all documents of “' + app.activeBook.name + '”?'});
 		}
 		var myResult = myDialog.show();
 		if (myResult) {
-			SaveOrCloseBookDocs(true, "YES");
+			SaveOrCloseBookDocs(true, 'YES');
 		}
 		myDialog.destroy();
 	}
 };
 
-var fcaTitle5 = "Close All Documents without Saving\u2026";
+var fcaTitle5 = 'Close All Documents without Saving\u2026';
 var fcaHandlers5 = {
 	'beforeDisplay' : function(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
 	},
 
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: "Close All Book Documents without Saving!" });
+		var myDialog = app.dialogs.add({ name: 'Close All Book Documents without Saving!' });
 		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?"});
+			staticTexts.add({staticLabel: 'Close all documents of “' + app.activeBook.name + '” without saving?'});
 		}
 		var myResult = myDialog.show();
 		if (myResult) {
-			SaveOrCloseBookDocs(true, "NO");
+			SaveOrCloseBookDocs(true, 'NO');
 		}
 		myDialog.destroy();
 	}
@@ -134,8 +134,8 @@ var fcaHandlers5 = {
 
 var fcaMenuInstaller = fcaMenuInstaller ||
 (function(items) {
-	var mainMenu = app.menus.item("$ID/BookPanelPopup"); // Works also: "$ID/Book Panel Menu"
-	var refItem = mainMenu.menuItems.item("$ID/Save Book");
+	var mainMenu = app.menus.item('$ID/BookPanelPopup'); // Works also: '$ID/Book Panel Menu'
+	var refItem = mainMenu.menuItems.item('$ID/Save Book');
 	for (var allIt = 0; allIt < items.length; allIt++) {
 		// 1. Create the script menu action
 		var mnuAction = app.scriptMenuActions.add(items[allIt].title);
