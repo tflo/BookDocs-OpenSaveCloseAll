@@ -40,14 +40,19 @@ var fcaHandlers1 = {
 
 	'onInvoke' : function()
 		{
-			// For a "silenced" alternative uncomment the next line (and also the one after the loop!)
-			// app.scriptPreferences.userInteractionLevel = UserInteractionLevels.neverInteract;
-			for (var i = app.activeBook.bookContents.length -1; i >= 0; i--)
-			{
-				app.open (app.activeBook.bookContents[i].fullName, true)
+			var showingWindow = !ScriptUI.environment.keyboardState.shiftKey;
+			var silence = ScriptUI.environment.keyboardState.altKey;
+			var origPref = app.scriptPreferences.userInteractionLevel;
+
+			if (silence) then {
+				app.scriptPreferences.userInteractionLevel = UserInteractionLevels.neverInteract;
 			}
-			// For a "silenced" alternative uncomment the next line
-			// app.scriptPreferences.userInteractionLevel = UserInteractionLevels.interactWithAll;
+
+			for (var i = app.activeBook.bookContents.length -1; i >= 0; i--) {
+				app.open (app.activeBook.bookContents[i].fullName, showingWindow)
+			}
+
+			app.scriptPreferences.userInteractionLevel = origPref;
 		}
 	};
 
