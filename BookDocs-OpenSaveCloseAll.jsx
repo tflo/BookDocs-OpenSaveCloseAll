@@ -15,6 +15,7 @@ function SaveOrCloseBookDocs(close, saveoption) {
 	var docs = app.documents;
 	var bookDocs = app.activeBook.bookContents;
 	for (var d = docs.length -1; d >= 0; d--) {
+		if (!docs[d].saved) continue;
 		var docFullName = docs[d].fullName.toString();
 		for (var b = bookDocs.length -1; b >= 0 ; b-- ) {
 			if (docFullName == bookDocs[b].fullName.toString()) {
