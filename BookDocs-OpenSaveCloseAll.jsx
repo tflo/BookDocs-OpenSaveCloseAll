@@ -16,8 +16,8 @@ function SaveOrCloseBookDocs(close, saveoption) {
 	var bookDocs = app.activeBook.bookContents;
 	for (var d = docs.length -1; d >= 0; d--) {
 		var docFullName = docs[d].fullName.toString();
-		for(var b = bookDocs.length -1; b >= 0 ; b-- ) {
-			if(docFullName == bookDocs[b].fullName.toString()) {
+		for (var b = bookDocs.length -1; b >= 0 ; b-- ) {
+			if (docFullName == bookDocs[b].fullName.toString()) {
 				if (close) {
 					docs[d].close(SaveOptions[saveoption]);
 				} else {
@@ -33,128 +33,110 @@ function SaveOrCloseBookDocs(close, saveoption) {
 
 var fcaTitle1 = "Open All Book Documents";
 var fcaHandlers1 = {
-	'beforeDisplay' : function(ev)
-		{
-			ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-		},
+	'beforeDisplay' : function(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+	},
 
-	'onInvoke' : function()
-		{
-			var showingWindow = !ScriptUI.environment.keyboardState.shiftKey;
-			var silence = ScriptUI.environment.keyboardState.altKey;
-			var origPref = app.scriptPreferences.userInteractionLevel;
+	'onInvoke' : function() {
+		var showingWindow = !ScriptUI.environment.keyboardState.shiftKey;
+		var silence = ScriptUI.environment.keyboardState.altKey;
+		var prevPrefs = app.scriptPreferences.userInteractionLevel;
 
-			if (silence) then {
-				app.scriptPreferences.userInteractionLevel = UserInteractionLevels.neverInteract;
-			}
-
-			for (var i = app.activeBook.bookContents.length -1; i >= 0; i--) {
-				app.open (app.activeBook.bookContents[i].fullName, showingWindow)
-			}
-
-			app.scriptPreferences.userInteractionLevel = origPref;
+		if (silence) {
+			app.scriptPreferences.userInteractionLevel = UserInteractionLevels.NEVER_INTERACT;
 		}
-	};
+
+		for (var i = app.activeBook.bookContents.length -1; i >= 0; i--) {
+			app.open (app.activeBook.bookContents[i].fullName, showingWindow);
+		}
+		app.scriptPreferences.userInteractionLevel = prevPrefs;
+	}
+};
 
 var fcaTitle2 = "Close All Book Documents";
 var fcaHandlers2 = {
-	'beforeDisplay' : function(ev)
-		{
-			ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-		},
+	'beforeDisplay' : function(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+	},
 
-	'onInvoke' : function()
-		{
-			SaveOrCloseBookDocs(true, "ASK")
-		}
-	};
+	'onInvoke' : function() {
+		SaveOrCloseBookDocs(true, "ASK");
+	}
+};
 
 var fcaTitle3 = "Save All Book Documents\u2026";
 var fcaHandlers3 = {
-	'beforeDisplay' : function(ev)
-		{
-			ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-		},
+	'beforeDisplay' : function(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+	},
 
-	'onInvoke' : function()
-		{
-			var myDialog = app.dialogs.add({ name: "Save all Book Documents" });
-			with (myDialog.dialogColumns.add()) {
-				staticTexts.add({ staticLabel: "Save all documents of '" + app.activeBook.name + "'?" });
-			}
-			var myResult = myDialog.show();
-			if (myResult) {
-				SaveOrCloseBookDocs()
-			}
-			myDialog.destroy();
+	'onInvoke' : function() {
+		var myDialog = app.dialogs.add({ name: "Save all Book Documents" });
+		with (myDialog.dialogColumns.add()) {
+			staticTexts.add({ staticLabel: "Save all documents of '" + app.activeBook.name + "'?" });
 		}
-	};
+		var myResult = myDialog.show();
+		if (myResult) {
+			SaveOrCloseBookDocs();
+		}
+		myDialog.destroy();
+	}
+};
 
 var fcaTitle4 = "Save and Close All Book Documents\u2026";
 var fcaHandlers4 = {
-	'beforeDisplay' : function(ev)
-		{
-			ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-		},
+	'beforeDisplay' : function(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+	},
 
-	'onInvoke' : function()
-		{
-			var myDialog = app.dialogs.add({ name: "Save and Close all Book Documents" });
-			with (myDialog.dialogColumns.add()) {
-				staticTexts.add({ staticLabel: "Save and close all documents of '" + app.activeBook.name + "'?" });
-			}
-			var myResult = myDialog.show();
-			if (myResult) {
-				SaveOrCloseBookDocs(true, "YES")
-			}
-			myDialog.destroy();
+	'onInvoke' : function() {
+		var myDialog = app.dialogs.add({ name: "Save and Close all Book Documents" });
+		with (myDialog.dialogColumns.add()) {
+			staticTexts.add({ staticLabel: "Save and close all documents of '" + app.activeBook.name + "'?" });
 		}
-	};
+		var myResult = myDialog.show();
+		if (myResult) {
+			SaveOrCloseBookDocs(true, "YES");
+		}
+		myDialog.destroy();
+	}
+};
 
 var fcaTitle5 = "Close All Book Documents w/o Saving\u2026";
 var fcaHandlers5 = {
-	'beforeDisplay' : function(ev)
-		{
-			ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-		},
+	'beforeDisplay' : function(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+	},
 
-	'onInvoke' : function()
-		{
-			var myDialog = app.dialogs.add({ name: "Close all Book Documents without Saving!" });
-			with (myDialog.dialogColumns.add()) {
-				staticTexts.add({ staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?" });
-			}
-			var myResult = myDialog.show();
-			if (myResult) {
-				SaveOrCloseBookDocs(true, "NO")
-			}
-			myDialog.destroy();
+	'onInvoke' : function() {
+		var myDialog = app.dialogs.add({ name: "Close all Book Documents without Saving!" });
+		with (myDialog.dialogColumns.add()) {
+			staticTexts.add({ staticLabel: "Close all documents of '" + app.activeBook.name + "' without saving?" });
 		}
-	};
+		var myResult = myDialog.show();
+		if (myResult) {
+			SaveOrCloseBookDocs(true, "NO");
+		}
+		myDialog.destroy();
+	}
+};
 
 // Add the menu items
 
-var fcaMenuInstaller = fcaMenuInstaller||
-(function(items)
-{
+var fcaMenuInstaller = fcaMenuInstaller ||
+(function(items) {
 	var allIt;
-	for (allIt=0; allIt<items.length; allIt++)
-	{
+	for (allIt = 0; allIt < items.length; allIt++) {
 		// 1. Create the script menu action
 		var mnuAction = app.scriptMenuActions.add(items[allIt].title);
-
 		// 2. Attach the event listener
 		var ev;
-		for( ev in items[allIt].handler )
-			{
-				mnuAction.eventListeners.add(ev,items[allIt].handler[ev]);
-			}
-
+		for (ev in items[allIt].handler) {
+			mnuAction.eventListeners.add(ev,items[allIt].handler[ev]);
+		}
 		// 3. Create the menu items
-		//Works also: "$ID/BookPanelPopup"
-		var mainMenu = app.menus.item("$ID/Book Panel Menu");
+		var mainMenu = app.menus.item("$ID/Book Panel Menu"); // Works also: "$ID/BookPanelPopup"
 		var refItem = mainMenu.menuItems.item("$ID/Close Book");
-
 		mainMenu.menuItems.add(mnuAction,LocationOptions.BEFORE, refItem);
 	}
 	return true;
