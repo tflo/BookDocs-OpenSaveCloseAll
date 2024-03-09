@@ -26,7 +26,7 @@ The script adds these menu items to the book panel menu:
 - Save and Close All Book Documents…
 - Close All Book Documents w/o Saving…
 
-![New menu items](menu-pty-fs8.png)
+<img src="menu-pty-fs8.png" width=50% height=50%>
 
 “Open All Book Documents” has two extra features:
 
@@ -38,7 +38,7 @@ The script adds these menu items to the book panel menu:
 
 All functions where the menu item ends in an ellipsis bring up a confirmation dialog (i.e. all actions that enforce “All”). I prefer it this way, because it is easy to misclick a menu item, and accidentally closing all book documents without saving (or sometimes also with saving all) is not a nice experience.
 
-To be extra safe, the confirmation dialog also shows the name of the book that Indesign considers to be the active book, so it should be less likely that you accidentally close all docs of the wrong book.
+To be extra safe, the confirmation dialog also shows the name of the book that InDesign considers to be the active book, so it should be less likely that you accidentally close all docs of the wrong book.
 
 ### “Close All” closes only book documents that actually are open
 
