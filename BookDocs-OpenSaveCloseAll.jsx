@@ -62,7 +62,7 @@ var fcaTitle1 = 'Open All Documents';
 var fcaHandlers1 = {
 	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var showingWindow = !ScriptUI.environment.keyboardState.shiftKey;
+		var showingWindow = !ScriptUI.environment.keyboardState.metaKey;
 		var silence = ScriptUI.environment.keyboardState.altKey;
 		var prevPrefs = app.scriptPreferences.userInteractionLevel;
 

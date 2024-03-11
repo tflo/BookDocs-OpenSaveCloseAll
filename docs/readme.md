@@ -34,8 +34,8 @@ Details see below.
 
 **“Open All Documents” has two extra features:**
 
-- Hold down ***Option*** (Alt) to **silence any dialogs** during opening (UserInteractionLevels.NEVER_INTERACT).
-- Hold down ***Shift*** to **open without showing windows** (this might be useful to speed up certain book-wide operations, like synching or updating, without having window/tab clutter; or just to “preload” documents, so that the window builds instantly when you double-click the book document later).
+- Hold down ***Option*** to **silence any dialogs** during opening (UserInteractionLevels.NEVER_INTERACT).
+- Hold down ***Command*** to **open without showing windows** (this might be useful to speed up certain book-wide operations, like synching or updating, without having window/tab clutter; or just to “preload” documents, so that the window builds instantly when you double-click the book document later).
 
 
 ### Confirmation prompts
