@@ -44,12 +44,16 @@ function canRun(ev) {
 		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
 }
 
-// The confirmation prompt
-function confPrompt(title, msg) {
+// Confirmation prompt
+function confPrompt(menuitemname, msg) {
 	var prevPrefs = app.scriptPreferences.userInteractionLevel;
 	app.scriptPreferences.userInteractionLevel = UserInteractionLevels.INTERACT_WITH_ALL;
+	var bookName = app.activeBook.name.replace('.indb', '');
+	var title = menuitemname.replace('\u2026', '').replace('All', 'All Book');
 	var prompt = app.dialogs.add({ name: title });
-	prompt.dialogColumns.add().staticTexts.add({ staticLabel: msg });
+	var text = prompt.dialogColumns.add().staticTexts;
+	text.add({ staticLabel: 'Documents of \u201C' + bookName +'\u201D\u2026' });
+	text.add({ staticLabel: '\u2026will be ' + msg });
 	var result = prompt.show();
 	prompt.destroy();
 	app.scriptPreferences.userInteractionLevel = prevPrefs;
@@ -94,10 +98,7 @@ var fcaTitle3 = 'Save All Documents\u2026';
 var fcaHandlers3 = {
 	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var result = confPrompt(
-			'Save All Book Documents',
-			'Save all documents of \u201C' + app.activeBook.name + '\u201D?'
-		)
+		var result = confPrompt(fcaTitle3, 'saved.')
 		if (result) SaveOrCloseBookDocs();
 	}
 };
@@ -106,10 +107,7 @@ var fcaTitle4 = 'Save and Close All Documents\u2026';
 var fcaHandlers4 = {
 	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var result = confPrompt(
-			'Save and Close All Book Documents',
-			'Save and close all documents of \u201C' + app.activeBook.name + '\u201D?'
-		)
+		var result = confPrompt(fcaTitle4, 'saved and closed.')
 		if (result) SaveOrCloseBookDocs(true, 'YES');
 	}
 };
@@ -118,10 +116,7 @@ var fcaTitle5 = 'Close All Documents without Saving\u2026';
 var fcaHandlers5 = {
 	'beforeDisplay' : function(ev) { canRun(ev) },
 	'onInvoke' : function() {
-		var result = confPrompt(
-			'Close All Book Documents without Saving!',
-			'Close all documents of \u201C' + app.activeBook.name + '\u201D without saving?'
-		)
+		var result = confPrompt(fcaTitle5, 'closed without saving!')
 		if (result) SaveOrCloseBookDocs(true, 'NO');
 	}
 };
