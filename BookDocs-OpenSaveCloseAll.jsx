@@ -46,10 +46,13 @@ function canRun(ev) {
 
 // The confirmation prompt
 function confPrompt(title, msg) {
+	var prevPrefs = app.scriptPreferences.userInteractionLevel;
+	app.scriptPreferences.userInteractionLevel = UserInteractionLevels.INTERACT_WITH_ALL;
 	var prompt = app.dialogs.add({ name: title });
 	prompt.dialogColumns.add().staticTexts.add({ staticLabel: msg });
 	var result = prompt.show();
 	prompt.destroy();
+	app.scriptPreferences.userInteractionLevel = prevPrefs;
 	return result;
 }
 
