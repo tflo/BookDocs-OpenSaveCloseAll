@@ -17,15 +17,16 @@ All credits to the original author(s).
 
 #targetengine 'BookDocs-OpenSaveCloseAll'
 
-// Core func for closing/saving all
+// Functions
 
+// Core func for closing/saving all
 function SaveOrCloseBookDocs(close, saveoption) {
 	var docs = app.documents;
 	var bookDocs = app.activeBook.bookContents;
 	for (var d = docs.length -1; d >= 0; d--) {
 		if (!docs[d].saved) continue;
 		var docFullName = docs[d].fullName.toString();
-		for (var b = bookDocs.length -1; b >= 0 ; b-- ) {
+		for (var b = bookDocs.length -1; b >= 0 ; b--) {
 			if (docFullName == bookDocs[b].fullName.toString()) {
 				if (close) {
 					docs[d].close(SaveOptions[saveoption]);
@@ -38,14 +39,28 @@ function SaveOrCloseBookDocs(close, saveoption) {
 	}
 }
 
+// Test if we have a book with documents
+function canRun(ev) {
+		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
+}
+
+// The confirmation prompt
+function confPrompt(title, msg) {
+	var prompt = app.dialogs.add({ name: title });
+	prompt.dialogColumns.add().staticTexts.add({ staticLabel: msg });
+	var result = prompt.show();
+	prompt.destroy();
+	return result;
+}
+
+
 // Titles and handlers for 5 new menu items
+
+// 2 items without confirmation prompt
 
 var fcaTitle1 = 'Open All Documents';
 var fcaHandlers1 = {
-	'beforeDisplay' : function(ev) {
-		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-	},
-
+	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
 		var showingWindow = !ScriptUI.environment.keyboardState.shiftKey;
 		var silence = ScriptUI.environment.keyboardState.altKey;
@@ -64,69 +79,47 @@ var fcaHandlers1 = {
 
 var fcaTitle2 = 'Close All Documents';
 var fcaHandlers2 = {
-	'beforeDisplay' : function(ev) {
-		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-	},
-
+	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
 		SaveOrCloseBookDocs(true, 'ASK');
 	}
 };
 
+// 3 items with confirmation prompt
+
 var fcaTitle3 = 'Save All Documents\u2026';
 var fcaHandlers3 = {
-	'beforeDisplay' : function(ev) {
-		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-	},
-
+	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: 'Save All Book Documents' });
-		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({ staticLabel: 'Save all documents of \u201C' + app.activeBook.name + '\u201D?' });
-		}
-		var myResult = myDialog.show();
-		if (myResult) {
-			SaveOrCloseBookDocs();
-		}
-		myDialog.destroy();
+		var result = confPrompt(
+			'Save All Book Documents',
+			'Save all documents of \u201C' + app.activeBook.name + '\u201D?'
+		)
+		if (result) SaveOrCloseBookDocs();
 	}
 };
 
 var fcaTitle4 = 'Save and Close All Documents\u2026';
 var fcaHandlers4 = {
-	'beforeDisplay' : function(ev) {
-		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-	},
-
+	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: 'Save and Close All Book Documents' });
-		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({staticLabel: 'Save and close all documents of \u201C' + app.activeBook.name + '\u201D?'});
-		}
-		var myResult = myDialog.show();
-		if (myResult) {
-			SaveOrCloseBookDocs(true, 'YES');
-		}
-		myDialog.destroy();
+		var result = confPrompt(
+			'Save and Close All Book Documents',
+			'Save and close all documents of \u201C' + app.activeBook.name + '\u201D?'
+		)
+		if (result) SaveOrCloseBookDocs(true, 'YES');
 	}
 };
 
 var fcaTitle5 = 'Close All Documents without Saving\u2026';
 var fcaHandlers5 = {
-	'beforeDisplay' : function(ev) {
-		ev.target.enabled = (app.books.length > 0 && app.activeBook.bookContents.length > 0);
-	},
-
+	'beforeDisplay' : function(ev) { canRun(ev) },
 	'onInvoke' : function() {
-		var myDialog = app.dialogs.add({ name: 'Close All Book Documents without Saving!' });
-		with (myDialog.dialogColumns.add()) {
-			staticTexts.add({staticLabel: 'Close all documents of \u201C' + app.activeBook.name + '\u201D without saving?'});
-		}
-		var myResult = myDialog.show();
-		if (myResult) {
-			SaveOrCloseBookDocs(true, 'NO');
-		}
-		myDialog.destroy();
+		var result = confPrompt(
+			'Close All Book Documents without Saving!',
+			'Close all documents of \u201C' + app.activeBook.name + '\u201D without saving?'
+		)
+		if (result) SaveOrCloseBookDocs(true, 'NO');
 	}
 };
 
