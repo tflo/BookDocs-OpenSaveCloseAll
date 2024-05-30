@@ -2,17 +2,16 @@
 
 A script for Adobe InDesign that **adds menu items to the book panel menu** for **opening/saving/closing *all* documents** of the active book. 
 
-This is a **startup script** (place it in the Startup Scripts folder inside your user scripts folder).
+To **download the script**, click the fat green “Code” button in the top region of this page and select “Download ZIP”, or [click here](https://github.com/tflo/BookDocs-OpenSaveCloseAll/archive/refs/heads/master.zip). The script is the “BookDocs-OpenSaveCloseAll.jsx” file, you can ignore the rest of the ZIP package.
 
-The script is based on the script “BookOpenAll“, downloaded from [here](https://creativepro.com/add-missing-options-to-the-book-menu/) (Theunis De Jong, 2012).
+This is a **startup script**, place it in the *Startup Scripts* folder inside your user scripts folder (for example: */Users/\<username\>/Library/Preferences/Adobe InDesign/Version 19.0/en_US/Scripts/Startup Scripts/*). You may have to create the *Startup Scripts* folder if it doesn’t exist.
 
-Other variants and related discussion on *hilfdirselbst*: [1](https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008), [2](https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html).
+The script has been tested with InDesign 19 en-US (2024) on macOS. Use the script at your own risk. Make sure it works properly with your setup (OS, InDesign version/language) before using it with production documents!
 
-This script has been tested with InDesign 19 en-US (2024) on macOS. *Since I recently added some features, there might be bugs…* (but it doesn't seem so). 
+<small>Sources: The script is based on the [“BookOpenAll“](https://creativepro.com/add-missing-options-to-the-book-menu/) script (Theunis De Jong, 2012). Other variants and related discussion on *hilfdirselbst*: [1](https://www.hilfdirselbst.ch/gforum/gforum.cgi?post=555008#555008), [2](https://indesign.hilfdirselbst.ch/2017/01/alle-dateien-im-indesign-buch-offnen.html).</small>
 
-Use this script at your own risk. Make sure it works properly with your setup (OS, ID version/language) before using it with production documents!
 
-## Main improvements over the original version: 
+## Major improvements over the original script and other known variants 
 
 - More functionality: *Open, Close, Save All*
 - Confirmation prompts for potentially dangerous actions
