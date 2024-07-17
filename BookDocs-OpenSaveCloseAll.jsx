@@ -116,7 +116,7 @@ var fcaTitle5 = 'Close All Documents without Saving\u2026';
 var fcaHandlers5 = {
 	'beforeDisplay' : canRun,
 	'onInvoke' : function() {
-		var result = confPrompt(fcaTitle5, 'closed without saving!')
+		var result = confPrompt(fcaTitle5, 'closed W\u200AI\u200AT\u200AH\u200AO\u200AU\u200AT S\u200AA\u200AV\u200AI\u200AN\u200AG\u200A!')
 		if (result) SaveOrCloseBookDocs(true, 'NO');
 	}
 };
